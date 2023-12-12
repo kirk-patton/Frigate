@@ -1,0 +1,2 @@
+# Frigate
+Frigate Configuration
