@@ -2,7 +2,7 @@
 
 Video LAN Client supports RTSP feeds.  Just past the url...
 
-rtsp://admin:{PASSWORD}@192.168.4.55:554/Streaming/Channels/101
+rtsp://{USER}:{PASSWORD}@192.168.4.55:554/Streaming/Channels/101
 
 # Timezone
 This needs to be set up properly on each camera. Just log into the camera using a web browser and the
