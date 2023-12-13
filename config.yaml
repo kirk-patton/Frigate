@@ -1,0 +1,132 @@
+# yaml-language-server: $schema=http://frigate_host:5000/api/config/schema.json
+mqtt:
+  enabled: True
+  host: mosquitto
+  port: 1883
+
+birdseye:
+  enabled: True
+  mode: objects
+
+record:
+  enabled: True
+  retain:
+    days: 7
+    mode: motion
+  events:
+    retain:
+      default: 30
+      mode: active_objects
+
+motion:
+  mask:    
+    - 26,51,221,45,218,25,25,27
+cameras:
+  frontyard:
+    motion:
+      mask:    
+        - 26,51,221,45,218,25,25,27
+        - 531,186,508,371,640,480,640,0,478,0
+    ffmpeg:
+      inputs:
+        - path: rtsp://{FRIGATE_RTSP_USER}:{FRIGATE_RTSP_PASSWORD}@192.168.4.55:554/Streaming/Channels/101
+          roles:
+            - record
+        - path: rtsp://{FRIGATE_RTSP_USER}:{FRIGATE_RTSP_PASSWORD}@192.168.4.55:554/Streaming/Channels/102
+          roles:
+            - detect
+    detect:
+      enabled: True # <---- disable detection until you have a working camera feed
+      width: 640 # <---- update for your camera's resolution
+      height: 480 # <---- update for your camera's resolution
+    record:
+      enabled: True
+  entry:
+    ffmpeg:
+      inputs:
+        - path: rtsp://{FRIGATE_RTSP_USER}:{FRIGATE_RTSP_PASSWORD}@192.168.4.54:554/Streaming/Channels/101
+          roles:
+            - record
+        - path: rtsp://{FRIGATE_RTSP_USER}:{FRIGATE_RTSP_PASSWORD}@192.168.4.54:554/Streaming/Channels/102
+          roles:
+            - detect
+    detect:
+      enabled: True # <---- disable detection until you have a working camera feed
+      width: 640 # <---- update for your camera's resolution
+      height: 480 # <---- update for your camera's resolution
+    record:
+      enabled: True
+  garage-side:
+    ffmpeg:
+      inputs:
+        - path: rtsp://{FRIGATE_RTSP_USER}:{FRIGATE_RTSP_PASSWORD}@192.168.4.53:554/Streaming/Channels/101
+          roles:
+            - record
+        - path: rtsp://{FRIGATE_RTSP_USER}:{FRIGATE_RTSP_PASSWORD}@192.168.4.53:554/Streaming/Channels/102
+          roles:
+            - detect
+    detect:
+      enabled: True # <---- disable detection until you have a working camera feed
+      width: 640 # <---- update for your camera's resolution
+      height: 480 # <---- update for your camera's resolution
+    record:
+      enabled: True
+  driveway:
+    ffmpeg:
+      inputs:
+        - path: rtsp://{FRIGATE_RTSP_USER}:{FRIGATE_RTSP_PASSWORD}@192.168.4.52:554/Streaming/Channels/101
+          roles:
+            - record
+        - path: rtsp://{FRIGATE_RTSP_USER}:{FRIGATE_RTSP_PASSWORD}@192.168.4.52:554/Streaming/Channels/102
+          roles:
+            - detect
+    detect:
+      enabled: True # <---- disable detection until you have a working camera feed
+      width: 640 # <---- update for your camera's resolution
+      height: 480 # <---- update for your camera's resolution
+    record:
+      enabled: True
+  backyard:
+    motion:
+      mask:    
+        - 2078,0,2688,0,2688,134,2688,418,2688,1520,2688,1172,2688,1520,1999,1520
+        - 472,1520,179,1057,1051,730,1254,1520
+        - 21,221,53,193,90,189,127,207,142,251,155,351,154,407,65,432
+        - 26,51,221,45,218,25,25,27
+    ffmpeg:
+      inputs:
+        - path: rtsp://{FRIGATE_RTSP_USER}:{FRIGATE_RTSP_PASSWORD}@192.168.4.51:554/Streaming/Channels/101
+          roles:
+            - record
+        - path: rtsp://{FRIGATE_RTSP_USER}:{FRIGATE_RTSP_PASSWORD}@192.168.4.51:554/Streaming/Channels/102
+          roles:
+            - detect
+    detect:
+      enabled: True # <---- disable detection until you have a working camera feed
+      width: 640 # <---- update for your camera's resolution
+      height: 480 # <---- update for your camera's resolution
+    record:
+      enabled: True
+  jasmin:
+    motion:
+      mask:    
+        - 26,51,221,45,218,25,25,27
+        - 381,416,640,407,640,330,640,294,640,228,640,156,640,67,544,21,173,0
+    ffmpeg:
+      inputs:
+        - path: rtsp://{FRIGATE_RTSP_USER}:{FRIGATE_RTSP_PASSWORD}@192.168.4.50:554/Streaming/Channels/101
+          roles:
+            - record
+        - path: rtsp://{FRIGATE_RTSP_USER}:{FRIGATE_RTSP_PASSWORD}@192.168.4.50:554/Streaming/Channels/102
+          roles:
+            - detect
+    detect:
+      enabled: True # <---- disable detection until you have a working camera feed
+      width: 640 # <---- update for your camera's resolution
+      height: 480 # <---- update for your camera's resolution
+    record:
+      enabled: True
+detectors:
+  coral:
+    type: edgetpu
+    device: usb
